@@ -66,13 +66,15 @@ namespace Clippy
             System.Drawing.Image newimage = new Bitmap(newWidth, newHeight); // changed parm names
             System.Drawing.Graphics graphic =
                          System.Drawing.Graphics.FromImage(newimage);
-
+            System.Drawing.Rectangle rect = new System.Drawing.Rectangle(0, 0, newWidth, newHeight);
             graphic.InterpolationMode = InterpolationMode.HighQualityBicubic;
             graphic.SmoothingMode = SmoothingMode.HighQuality;
             graphic.PixelOffsetMode = PixelOffsetMode.HighQuality;
             graphic.CompositingQuality = CompositingQuality.HighQuality;
 
-            graphic.Clear(Color.White); // white padding
+            SolidBrush b = new SolidBrush(Color.Black);
+            graphic.Clear(Color.Black); // white padding
+            graphic.FillRectangle(b, rect);
             graphic.DrawImage(image, 0, 0, newWidth, newHeight);
             return newimage;
         }
